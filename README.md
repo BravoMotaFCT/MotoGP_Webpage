@@ -1,3 +1,3 @@
 # MotoGP_Webpage
 
-#Webpage for IADI assignment 0.
+Webpage for IADI assignment 0.
