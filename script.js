@@ -1,8 +1,41 @@
-  
+// ß search = new SerpApi.GoogleSearch("1eca3d0052a0aaa535560e2a0bd96f3a7d6634f0fde34d1d4043fe57fb4dc557");
+
+
+const secret = "1eca3d0052a0aaa535560e2a0bd96f3a7d6634f0fde34d1d4043fe57fb4dc557"
 
 const championshipsURL = "https://racingmike.com/api/v1.0/motogp-category?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&year=2023";
 const ridersURL = "https://racingmike.com/api/v1.0/motogp-world-standing-riders?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&year=2023&categoryid=";
-const riderImagesURL = "https://racingmike.com/api/v1.0/rider-images?token=YOUR_TOKEN";
+
+function imageSearchStr(query, engine){
+  return "https://serpapi.com/search.json?q=" + query + "&engine=" + engine;
+}
+function fetchRiderImage(){
+  let params = {
+    engine: "google_images",
+    q: "Coffee",
+    location: "Austin, TX, Texas, United States"
+  };
+
+  const callback = function(data) {
+    console.log(data);
+  };
+  
+  // Show result as JSON
+  search.json(params, callback);
+}
+
+function fetchRiderImage2(name){
+  url = imageSearchStr(name, "google_images")
+  fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(option => {
+      return option.images_result.link;
+    });
+  })
+  .catch(error => console.error('Error:', error));
+
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     const dropdown = document.getElementById('dropdown');
@@ -20,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdown.appendChild(optionElement);
           });
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error));ß
     }
   
     dropdown.addEventListener('change', function() {
@@ -50,7 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
       
                 // Add an empty cell for the rider image
                 const imageCell = document.createElement('td');
-      
+                const image = document.createElement('img');
+                const riderName = item.classification_rider_full_name;
+                image.src = fetchRiderImage2(riderName);
+                image.alt = riderName;
+                image.width = 50;
+                imageCell.appendChild(image);
+  
+    
                 row.appendChild(posCell);
                 row.appendChild(nameCell);
                 row.appendChild(pointsCell);
@@ -58,19 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
                 resultBody.appendChild(row);
       
-                // Fetch the rider image
-                fetch(`${riderImagesURL}&riderid=${item.rider_id}`)
-                  .then(response => response.json())
-                  .then(imageData => {
-                    if (imageData.length > 0) {
-                      const image = document.createElement('img');
-                      image.src = imageData[0].image_url; // Assuming 'image_url' is the property for the image URL
-                      image.alt = item.classification_rider_full_name;
-                      image.width = 50; // Set the desired width
-                      imageCell.appendChild(image);
-                    }
-                  })
-                  .catch(error => console.error('Error:', error));
               });
             })
             .catch(error => console.error('Error:', error));
