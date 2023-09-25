@@ -1,4 +1,3 @@
-// ß search = new SerpApi.GoogleSearch("1eca3d0052a0aaa535560e2a0bd96f3a7d6634f0fde34d1d4043fe57fb4dc557");
 
 
 const secret = "1eca3d0052a0aaa535560e2a0bd96f3a7d6634f0fde34d1d4043fe57fb4dc557"
@@ -39,7 +38,6 @@ function fetchRiderImage2(name){
 
 document.addEventListener('DOMContentLoaded', function() {
     const dropdown = document.getElementById('dropdown');
-    const selectedOption = document.getElementById('selectedOption');
     const resultBody = document.getElementById('resultBody');
   
     function populateDropdown() {
@@ -52,15 +50,20 @@ document.addEventListener('DOMContentLoaded', function() {
             optionElement.textContent = option.name;
             dropdown.appendChild(optionElement);
           });
+          const lastOption = dropdown.lastElementChild;
+          lastOption.selected = true; 
+          const event = new Event('change');
+          dropdown.dispatchEvent(event);
+      
         })
-        .catch(error => console.error('Error:', error));ß
+        .catch(error => console.error('Error:', error));
+
+    
     }
   
     dropdown.addEventListener('change', function() {
         const selectedValue = dropdown.value;
-        if (selectedValue) {
-          selectedOption.textContent = `Selected Option: ${selectedValue}`;
-      
+        if (selectedValue) {      
           // Make a second request to the API using the selected value
           fetch(ridersURL + selectedValue)
             .then(response => response.json())
@@ -82,19 +85,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 pointsCell.textContent = item.total_points;
       
                 // Add an empty cell for the rider image
-                const imageCell = document.createElement('td');
-                const image = document.createElement('img');
-                const riderName = item.classification_rider_full_name;
-                image.src = fetchRiderImage2(riderName);
-                image.alt = riderName;
-                image.width = 50;
-                imageCell.appendChild(image);
+                // const imageCell = document.createElement('td');
+                // const image = document.createElement('img');
+                // const riderName = item.classification_rider_full_name;
+                // const apiKey = 'EHdqeWE43CtKIGMMg2F_8d_S9YfuzSPn2UlT6-DbrJ4'; // Replace with your actual API key
+                // const query = riderName;
+                // fetch(`https://api.unsplash.com/search/photos?query=${query}&client_id=${apiKey}`)
+                //   .then(response => response.json())
+                //   .then(data => {
+                //     // Process the data (e.g., display images)
+                //     console.log(data);
+                //   })
+                //   .catch(error => console.error('Error:', error));
+                // image.src = fetchRiderImage2(riderName);
+                // image.alt = riderName;
+                // image.width = 50;
+                // imageCell.appendChild(image);
   
     
                 row.appendChild(posCell);
                 row.appendChild(nameCell);
                 row.appendChild(pointsCell);
-                row.appendChild(imageCell); // Append the image cell
+                // row.appendChild(imageCell); // Append the image cell
       
                 resultBody.appendChild(row);
       

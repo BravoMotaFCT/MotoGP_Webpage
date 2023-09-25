@@ -1,0 +1,48 @@
+/* Add some basic styling to the container */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the dropdown menu */
+  #dropdown {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the result table */
+  #resultTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  #resultTable th, #resultTable td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  #resultTable th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Add some space between the container and the edge of the page */
+  body {
+    margin: 20px;
+  }
+  
+  /* Center the container on the page */
+  .container {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
