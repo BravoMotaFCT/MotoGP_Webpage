@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Dynamic Dropdown Example</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MotoGP Standings</title> <!-- Add the title here -->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>MotoGP Standings</h1> <!-- Add the title here -->
+            <!-- Rest of your content goes here -->
+        </div>
+        
     <div class="container">
         <select id="dropdown"></select>
-        <div class="result-table">
-            <h2>Standings</h2>
-            <table id="resultTable">
-                <thead>
-                    <tr>
-                        <th>Position</th>
-                        <th>Rider</th>
-                        <th>Total Points</th>
-                        <!-- Add more columns as needed -->
-                    </tr>
-                </thead>
-                <tbody id="resultBody"></tbody>
-            </table>
-        </div>
+        <div class="card-container" id="cardContainer"></div>
     </div>
     <script src="script.js"></script>
 </body>

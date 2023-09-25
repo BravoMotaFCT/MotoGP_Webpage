@@ -37,86 +37,64 @@ function fetchRiderImage2(name){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const dropdown = document.getElementById('dropdown');
-    const resultBody = document.getElementById('resultBody');
-  
-    function populateDropdown() {
-      fetch(championshipsURL)
-        .then(response => response.json())
-        .then(data => {
-          data.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option.id;
-            optionElement.textContent = option.name;
-            dropdown.appendChild(optionElement);
-          });
-          const lastOption = dropdown.lastElementChild;
-          lastOption.selected = true; 
-          const event = new Event('change');
-          dropdown.dispatchEvent(event);
-      
-        })
-        .catch(error => console.error('Error:', error));
+  const dropdown = document.getElementById('dropdown');
+  const cardContainer = document.getElementById('cardContainer');
 
-    
-    }
-  
-    dropdown.addEventListener('change', function() {
-        const selectedValue = dropdown.value;
-        if (selectedValue) {      
-          // Make a second request to the API using the selected value
-          fetch(ridersURL + selectedValue)
-            .then(response => response.json())
-            .then(data => {
-              // Clear previous table rows
-              resultBody.innerHTML = '';
-      
-              position = 0;
-              data.forEach(item => {
-                position++;
-                const row = document.createElement('tr');
-                const posCell = document.createElement('td');
-                posCell.textContent = position + ".º";
-      
-                const nameCell = document.createElement('td');
-                nameCell.textContent = item.classification_rider_full_name;
-      
-                const pointsCell = document.createElement('td');
-                pointsCell.textContent = item.total_points;
-      
-                // Add an empty cell for the rider image
-                // const imageCell = document.createElement('td');
-                // const image = document.createElement('img');
-                // const riderName = item.classification_rider_full_name;
-                // const apiKey = 'EHdqeWE43CtKIGMMg2F_8d_S9YfuzSPn2UlT6-DbrJ4'; // Replace with your actual API key
-                // const query = riderName;
-                // fetch(`https://api.unsplash.com/search/photos?query=${query}&client_id=${apiKey}`)
-                //   .then(response => response.json())
-                //   .then(data => {
-                //     // Process the data (e.g., display images)
-                //     console.log(data);
-                //   })
-                //   .catch(error => console.error('Error:', error));
-                // image.src = fetchRiderImage2(riderName);
-                // image.alt = riderName;
-                // image.width = 50;
-                // imageCell.appendChild(image);
-  
-    
-                row.appendChild(posCell);
-                row.appendChild(nameCell);
-                row.appendChild(pointsCell);
-                // row.appendChild(imageCell); // Append the image cell
-      
-                resultBody.appendChild(row);
-      
+  function populateDropdown() {
+      fetch(championshipsURL)
+          .then(response => response.json())
+          .then(data => {
+              data.forEach(option => {
+                  const optionElement = document.createElement('option');
+                  optionElement.value = option.id;
+                  optionElement.textContent = option.name;
+                  dropdown.appendChild(optionElement);
               });
-            })
-            .catch(error => console.error('Error:', error));
-        }
-      });
-      
-  
-    populateDropdown();
+              const lastOption = dropdown.lastElementChild;
+              lastOption.selected = true; 
+              const event = new Event('change');
+              dropdown.dispatchEvent(event);
+          })
+          .catch(error => console.error('Error:', error));
+  }
+
+  dropdown.addEventListener('change', function() {
+      const selectedValue = dropdown.value;
+      if (selectedValue) {      
+          fetch(ridersURL + selectedValue)
+              .then(response => response.json())
+              .then(data => {
+                  // Clear previous cards
+                  cardContainer.innerHTML = '';
+
+                  position = 0;
+                  data.forEach(item => {
+                      position++;
+                      const row = document.createElement('div'); // Create a new row div
+                      row.classList.add('card-row'); // Add a class for styling
+
+                      const card = document.createElement('div');
+                      card.classList.add('card');
+
+                      const cardContent = `
+                          <div class="position">${position}.º</div>
+                          <div class="rider">
+                            <strong style="font-size: 1.5em;">${item.classification_rider_full_name}</strong><br>${item.classification_team_name}
+                          </div>
+                                                <div class="points">${item.total_points}  pts</div>
+                          <div class="flag">
+                              <img src="https://www.countryflagicons.com/FLAT/64/${item.classification_rider_country_iso}.png">
+                          </div>
+                      `;
+
+                      card.innerHTML = cardContent;
+                      row.appendChild(card); // Add the card to the row
+                      cardContainer.appendChild(row); // Add the row to the container
+                  });
+              })
+              .catch(error => console.error('Error:', error));
+      }
   });
-  
+
+  populateDropdown();
+});

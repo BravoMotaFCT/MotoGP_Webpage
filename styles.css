@@ -1,48 +1,70 @@
-/* Add some basic styling to the container */
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Style the dropdown menu */
-  #dropdown {
+    text-align: center;
+}
+
+#dropdown {
     width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
-  }
-  
-  /* Style the result table */
-  #resultTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  #resultTable th, #resultTable td {
-    padding: 10px;
-    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column; /* Change to column */
+    align-items: center; /* Center the cards horizontally */
+}
+
+.card {
+    width: 550px; /* Adjusted width for the cards */
     border: 1px solid #ccc;
-  }
-  
-  #resultTable th {
-    background-color: #f0f0f0;
-  }
-  
-  /* Add some space between the container and the edge of the page */
-  body {
-    margin: 20px;
-  }
-  
-  /* Center the container on the page */
-  .container {
-    margin: 0 auto;
+    border-radius: 8px;
+    margin: 10px 0; /* Adjusted margin for spacing between cards */
+    max-width: 1000px;
     text-align: center;
-  }
-  
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+
+}
+
+.position {
+    flex: 1;
+    padding: 20px;
+    font-size: 1.5em; /* Adjusted font size for big sections */
+    font: Fantasy;
+    align-items: center;
+    justify-content: center;
+}
+
+.points {
+    flex: 1;
+    padding: 20px;
+    font-size: 1.5em; /* Adjusted font size for big sections */
+    align-items: center;
+    justify-content: center;
+}
+
+.rider {
+    flex: 4;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.flag {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card img {
+    width: 100px; /* Set a fixed width for the flag image */
+    height: auto; /* Maintain the aspect ratio */
+}
